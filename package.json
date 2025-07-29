@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@pimlico/alto": "^0.0.19",
+    "@pimlico/mock-paymaster": "^0.0.4",
+    "get-port": "^7.1.0",
+    "permissionless": "^0.2.52",
+    "prool": "^0.0.24",
+    "viem": "^2.33.1"
+  },
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  }
+}
