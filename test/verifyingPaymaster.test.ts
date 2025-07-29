@@ -11,18 +11,36 @@ import { toSimpleSmartAccount } from "permissionless/accounts";
 import { testWithRpc } from "../utils/testWithRpc";
 import { createSmartAccountClient } from "permissionless";
 import { createPimlicoClient } from "permissionless/clients/pimlico";
+import { foundry } from "viem/chains";
 
 describe("Basic test cases", () => {
 	testWithRpc("Can send a non sponsored userOperation", async ({ rpc }) => {
 		const { anvilRpc, altoRpc } = rpc;
 
-		const client = createPublicClient({
+		// Setup clients.
+		const publicClient = createPublicClient({
+			chain: foundry,
 			transport: http(anvilRpc),
 		});
 
+		const pimlicoClient = createPimlicoClient({
+			chain: foundry,
+			transport: http(altoRpc),
+		});
+
 		const account = await toSimpleSmartAccount({
-			client,
+			client: publicClient,
 			owner: privateKeyToAccount(generatePrivateKey()),
+		});
+
+		const smartAccountClient = createSmartAccountClient({
+			chain: foundry,
+			account,
+			bundlerTransport: http(altoRpc),
+			userOperation: {
+				estimateFeesPerGas: async () =>
+					(await pimlicoClient.getUserOperationGasPrice()).fast,
+			},
 		});
 
 		// Fund the SmartAccount.
@@ -35,11 +53,7 @@ describe("Basic test cases", () => {
 			value: parseEther("1"),
 		});
 
-		const smartAccountClient = createSmartAccountClient({
-			account,
-			bundlerTransport: http(altoRpc),
-		});
-
+		// Send userOperation and wait for receipt.
 		const userOpHash = await smartAccountClient.sendUserOperation({
 			calls: [
 				{
@@ -61,26 +75,33 @@ describe("Basic test cases", () => {
 	testWithRpc("Can send a sponsored userOperation", async ({ rpc }) => {
 		const { anvilRpc, altoRpc, paymasterRpc } = rpc;
 
-		const client = createPublicClient({
+		// Setup clients.
+		const publicClient = createPublicClient({
+			chain: foundry,
 			transport: http(anvilRpc),
 		});
 
-		const account = await toSimpleSmartAccount({
-			client,
-			owner: privateKeyToAccount(generatePrivateKey()),
+		const pimlicoClient = createPimlicoClient({
+			chain: foundry,
+			transport: http(paymasterRpc),
 		});
 
-		// Setup paymaster client.
-		const pimlicoClient = createPimlicoClient({
-			transport: http(paymasterRpc),
+		const account = await toSimpleSmartAccount({
+			client: publicClient,
+			owner: privateKeyToAccount(generatePrivateKey()),
 		});
 
 		const smartAccountClient = createSmartAccountClient({
 			account,
 			bundlerTransport: http(altoRpc),
 			paymaster: pimlicoClient,
+			userOperation: {
+				estimateFeesPerGas: async () =>
+					(await pimlicoClient.getUserOperationGasPrice()).fast,
+			},
 		});
 
+		// Send userOperation and wait for receipt.
 		const userOpHash = await smartAccountClient.sendUserOperation({
 			calls: [
 				{

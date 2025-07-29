@@ -50,6 +50,27 @@ export const getInstances = async ({
 		port: paymasterPort,
 	});
 
+	//anvilInstance.on("stderr", (data) => {
+	//	console.error(data.toString());
+	//});
+	//anvilInstance.on("stdout", (data) => {
+	//	console.log(data.toString());
+	//});
+
+	//altoInstance.on("stderr", (data) => {
+	//	console.error(data.toString());
+	//});
+	//altoInstance.on("stdout", (data) => {
+	//	console.log(data.toString());
+	//});
+
+	//paymasterInstance.on("stderr", (data) => {
+	//	console.error(data.toString());
+	//});
+	//paymasterInstance.on("stdout", (data) => {
+	//	console.log(data.toString());
+	//});
+
 	await anvilInstance.start();
 	await altoInstance.start();
 	await paymasterInstance.start();
