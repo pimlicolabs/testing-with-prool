@@ -50,6 +50,8 @@ export const getInstances = async ({
 		port: paymasterPort,
 	});
 
+	// Uncomment these to print logs to stdout.
+
 	//anvilInstance.on("stderr", (data) => {
 	//	console.error(data.toString());
 	//});
