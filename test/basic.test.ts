@@ -102,7 +102,7 @@ describe("Basic test cases", () => {
 		});
 
 		// Send userOperation and wait for receipt.
-		const userOpHash = await smartAccountClient.sendUserOperation({
+		const userOpHash = await smartAccountClient.sendTransaction({
 			calls: [
 				{
 					to: zeroAddress,
