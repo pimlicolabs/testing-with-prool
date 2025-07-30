@@ -14,7 +14,7 @@ import { createPimlicoClient } from "permissionless/clients/pimlico";
 import { foundry } from "viem/chains";
 
 describe("Basic test cases", () => {
-	testWithRpc("Can send a sponsored userOperation", async ({ rpc }) => {
+	testWithRpc("Can send a non sponsored userOperation", async ({ rpc }) => {
 		const { anvilRpc, altoRpc, paymasterRpc } = rpc;
 
 		// Setup clients.
