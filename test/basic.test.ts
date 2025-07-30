@@ -6,7 +6,7 @@ import {
 	parseEther,
 	zeroAddress,
 } from "viem";
-import { assert, describe } from "vitest";
+import { expect, describe } from "vitest";
 import { toSimpleSmartAccount } from "permissionless/accounts";
 import { testWithRpc } from "../utils/testWithRpc";
 import { createSmartAccountClient } from "permissionless";
@@ -14,8 +14,8 @@ import { createPimlicoClient } from "permissionless/clients/pimlico";
 import { foundry } from "viem/chains";
 
 describe("Basic test cases", () => {
-	testWithRpc("Can send a non sponsored userOperation", async ({ rpc }) => {
-		const { anvilRpc, altoRpc } = rpc;
+	testWithRpc("Can send a sponsored userOperation", async ({ rpc }) => {
+		const { anvilRpc, altoRpc, paymasterRpc } = rpc;
 
 		// Setup clients.
 		const publicClient = createPublicClient({
@@ -25,7 +25,7 @@ describe("Basic test cases", () => {
 
 		const pimlicoClient = createPimlicoClient({
 			chain: foundry,
-			transport: http(altoRpc),
+			transport: http(paymasterRpc),
 		});
 
 		const account = await toSimpleSmartAccount({
@@ -69,7 +69,7 @@ describe("Basic test cases", () => {
 		});
 
 		// UserOperation should be included successfully.
-		assert(receipt.success);
+		expect(receipt.success).toBe(true);
 	});
 
 	testWithRpc("Can send a sponsored userOperation", async ({ rpc }) => {
@@ -102,7 +102,7 @@ describe("Basic test cases", () => {
 		});
 
 		// Send userOperation and wait for receipt.
-		const userOpHash = await smartAccountClient.sendTransaction({
+		const userOpHash = await smartAccountClient.sendUserOperation({
 			calls: [
 				{
 					to: zeroAddress,
@@ -117,6 +117,6 @@ describe("Basic test cases", () => {
 		});
 
 		// UserOperation should be included successfully.
-		assert(receipt.success);
+		expect(receipt.success).toBe(true);
 	});
 });

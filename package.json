@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@pimlico/alto": "^0.0.19",
-    "@pimlico/mock-paymaster": "^0.0.4",
+    "@pimlico/mock-paymaster": "^0.0.5",
     "get-port": "^7.1.0",
     "permissionless": "^0.2.52",
     "prool": "^0.0.24",

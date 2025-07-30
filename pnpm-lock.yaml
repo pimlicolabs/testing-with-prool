@@ -12,8 +12,8 @@ importers:
         specifier: ^0.0.19
         version: 0.0.19(typescript@5.8.3)
       '@pimlico/mock-paymaster':
-        specifier: ^0.0.4
-        version: 0.0.4(prool@0.0.24(@pimlico/alto@0.0.19(typescript@5.8.3)))(viem@2.33.1(typescript@5.8.3)(zod@3.25.76))
+        specifier: ^0.0.5
+        version: 0.0.5(prool@0.0.24(@pimlico/alto@0.0.19(typescript@5.8.3)))(viem@2.33.1(typescript@5.8.3)(zod@3.25.76))
       get-port:
         specifier: ^7.1.0
         version: 7.1.0
@@ -628,8 +628,8 @@ packages:
     resolution: {integrity: sha512-0V7cXgZxHeqZMeZ1gnkpKDcTGM/8eJI2r48FOstSFh5ikkRqlXik6Vpe3gKyDma4BTKgaiF/scMOcQezYI9+yg==}
     hasBin: true
 
-  '@pimlico/mock-paymaster@0.0.4':
-    resolution: {integrity: sha512-i7cFHi6s9trFkpYGMHmIBkRlVrbYA3T/JCZrmBmCYjT8cuw5LN3MWqWPhv6XoSbtbQcJrGZ9YQZ0b4d+M4M+9A==}
+  '@pimlico/mock-paymaster@0.0.5':
+    resolution: {integrity: sha512-atybNmp1hc4/VGcLAKJjkX7Ef6RqrLnsdxiFf6/IMmf5U2V99q6kZ+3wQTmEtWXFBaIQgomPLydxMIq4M0TUdQ==}
     peerDependencies:
       prool: ^0.0.23
       viem: ^2.28.1
@@ -2557,7 +2557,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@pimlico/mock-paymaster@0.0.4(prool@0.0.24(@pimlico/alto@0.0.19(typescript@5.8.3)))(viem@2.33.1(typescript@5.8.3)(zod@3.25.76))':
+  '@pimlico/mock-paymaster@0.0.5(prool@0.0.24(@pimlico/alto@0.0.19(typescript@5.8.3)))(viem@2.33.1(typescript@5.8.3)(zod@3.25.76))':
     dependencies:
       '@fastify/cors': 8.5.0
       fastify: 4.29.1
